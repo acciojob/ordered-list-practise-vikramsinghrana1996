@@ -1,4 +1,4 @@
-// Define the expected text array with periods to match the HTML content
+const para_text = "We can optimize a solution using both time and space optimization. To optimize a program,";
 const list_texts = [
     "We can reduce the time taken to run the program and increase the space occupied.",
     "We can reduce the memory usage of the program and increase its total run time.",
@@ -7,23 +7,22 @@ const list_texts = [
 
 describe('Code Optimization Page', () => {
     before(() => {
-        // Visit the page
-        cy.visit('path/to/your/index.html'); // Adjust the path as needed
+        // Visit the correct path to the HTML file
+        cy.visit('path/to/your/index.html'); // Replace with the actual path
     });
 
-    it('should display correct list items', () => {
-        // Solution 1: Exact Text Match
+    it('should contain the paragraph, ordered list, and list items', () => {
+        // Verify the paragraph element exists and has the correct text
+        cy.get('p', { timeout: 10000 }).should('have.length', 1)
+          .and('have.text', para_text);
+
+        // Verify the ordered list exists and contains the correct number of items
+        cy.get('ol', { timeout: 10000 }).should('have.length', 1);
+        cy.get('li', { timeout: 10000 }).should('have.length', 3);
+
+        // Check each list item has the expected text
         list_texts.forEach((text, idx) => {
             cy.get('li').eq(idx).should('have.text', text);
         });
-
-        // Solution 2: Partial Match (if exact punctuation is not crucial)
-        // Uncomment this section if using partial match instead of exact match.
-        /*
-        list_texts.forEach((text, idx) => {
-            cy.get('li').eq(idx).should('include.text', text);
-        });
-        */
     });
 });
-

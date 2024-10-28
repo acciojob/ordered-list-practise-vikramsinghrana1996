@@ -1,25 +1,29 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="styles.css">
-    <title>Code Optimization</title>
-</head>
-
-<body>
-    <!-- the entire body must be written by student -->
-    <p>We can optimize a solution using both time and space optimization. To optimize a program,</p>
-    const list_texts = [
+// Define the expected text array with periods to match the HTML content
+const list_texts = [
     "We can reduce the time taken to run the program and increase the space occupied.",
     "We can reduce the memory usage of the program and increase its total run time.",
     "We can reduce both time and space complexity by deploying relevant algorithms."
 ];
 
-    <script type="text/javascript" src="./script.js"></script>
+describe('Code Optimization Page', () => {
+    before(() => {
+        // Visit the page
+        cy.visit('path/to/your/index.html'); // Adjust the path as needed
+    });
 
-</body>
+    it('should display correct list items', () => {
+        // Solution 1: Exact Text Match
+        list_texts.forEach((text, idx) => {
+            cy.get('li').eq(idx).should('have.text', text);
+        });
 
-</html>
+        // Solution 2: Partial Match (if exact punctuation is not crucial)
+        // Uncomment this section if using partial match instead of exact match.
+        /*
+        list_texts.forEach((text, idx) => {
+            cy.get('li').eq(idx).should('include.text', text);
+        });
+        */
+    });
+});
 
